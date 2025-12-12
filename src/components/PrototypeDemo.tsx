@@ -6,10 +6,13 @@ import gallery1 from "@/assets/gallery-new-1.png";
 import gallery2 from "@/assets/gallery-new-2.png";
 import gallery3 from "@/assets/gallery-new-3.png";
 import gallery4 from "@/assets/gallery-new-4.jpg";
+import product1 from "@/assets/product-1.jpg";
+import product2 from "@/assets/product-2.jpg";
+import product3 from "@/assets/product-3.png";
 
 export const PrototypeDemo = () => {
     const { t } = useLanguage();
-    const [activeView, setActiveView] = useState<"start" | "gallery">("start");
+    const [activeView, setActiveView] = useState<"start" | "gallery" | "products">("start");
     const [selectedAgent, setSelectedAgent] = useState("Tameem");
 
     return (
@@ -58,9 +61,19 @@ export const PrototypeDemo = () => {
                                 <div>
                                     <h3 className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Library</h3>
                                     <div className="space-y-2">
-                                        <button className="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg text-muted-foreground hover:bg-white/5">
+                                        <button 
+                                            onClick={() => setActiveView("products")}
+                                            className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${activeView === "products" ? "bg-white/10 text-white" : "text-muted-foreground hover:bg-white/5"}`}
+                                        >
                                             <LayoutTemplate className="w-4 h-4" />
                                             <span className="text-sm">Your Products</span>
+                                            {/* Tutorial Hint */}
+                                            {activeView === "start" && (
+                                                <span className="relative flex h-2 w-2 ml-auto">
+                                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                                                </span>
+                                            )}
                                         </button>
                                         <button
                                             onClick={() => setActiveView("gallery")}
@@ -111,9 +124,15 @@ export const PrototypeDemo = () => {
 
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <button
-                                            onClick={() => setActiveView("gallery")}
-                                            className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all text-center space-y-4"
+                                            onClick={() => setActiveView("products")}
+                                            className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all text-center space-y-4 relative"
                                         >
+                                            {/* Tutorial Hint */}
+                                            <span className="absolute top-4 right-4 flex h-3 w-3">
+                                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                            </span>
+
                                             <div className="w-16 h-16 rounded-full bg-white/5 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform">
                                                 <ImageIcon className="w-8 h-8 text-purple-500" />
                                             </div>
@@ -132,6 +151,27 @@ export const PrototypeDemo = () => {
                                                 <p className="text-sm text-muted-foreground">Add new product photos to your collection.</p>
                                             </div>
                                         </button>
+                                    </div>
+                                </div>
+                            ) : activeView === "products" ? (
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+                                        <img src={product1} alt="Product 1" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                            <p className="text-white font-medium">Black Graphic Hoodie</p>
+                                        </div>
+                                    </div>
+                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+                                        <img src={product2} alt="Product 2" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                            <p className="text-white font-medium">Casual Sweatpants</p>
+                                        </div>
+                                    </div>
+                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+                                        <img src={product3} alt="Product 3" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                            <p className="text-white font-medium">Grey Basic Hoodie</p>
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
