@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Image as ImageIcon, Upload, Filter, Grid, LayoutTemplate, Sun, MousePointer2, ArrowRight } from "lucide-react";
+import { Image as ImageIcon, Upload, Filter, Grid, LayoutTemplate, Sun, MousePointer2, ArrowRight, X } from "lucide-react";
 import gallery1 from "@/assets/gallery-new-1.png";
 import gallery2 from "@/assets/gallery-new-2.png";
 import gallery3 from "@/assets/gallery-new-3.png";
@@ -17,6 +17,7 @@ export const PrototypeDemo = () => {
     const [activeView, setActiveView] = useState<"start" | "gallery" | "products">("start");
     const [selectedAgent, setSelectedAgent] = useState("Tameem");
     const [tutorialStep, setTutorialStep] = useState(0); // 0: Start, 1: Products Viewed, 2: Gallery Viewed
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     const handleViewProducts = () => {
         setActiveView("products");
@@ -184,19 +185,19 @@ export const PrototypeDemo = () => {
                                 </div>
                             ) : activeView === "products" ? (
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5 cursor-pointer" onClick={() => setSelectedImage(caseHand)}>
                                         <img src={caseHand} alt="Product 1" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                             <p className="text-white font-medium">Clear Case (Hand)</p>
                                         </div>
                                     </div>
-                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5 cursor-pointer" onClick={() => setSelectedImage(product2)}>
                                         <img src={product2} alt="Product 2" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                             <p className="text-white font-medium">Casual Sweatpants</p>
                                         </div>
                                     </div>
-                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
+                                    <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5 cursor-pointer" onClick={() => setSelectedImage(product3)}>
                                         <img src={product3} alt="Product 3" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                                             <p className="text-white font-medium">Grey Basic Hoodie</p>
@@ -205,16 +206,16 @@ export const PrototypeDemo = () => {
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5" onClick={() => setSelectedImage(caseBlue)}>
                                         <img src={caseBlue} alt="Gallery 1" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
                                     </div>
-                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5" onClick={() => setSelectedImage(gallery2)}>
                                         <img src={gallery2} alt="Gallery 2" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
                                     </div>
-                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5" onClick={() => setSelectedImage(gallery3)}>
                                         <img src={gallery3} alt="Gallery 3" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
                                     </div>
-                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5" onClick={() => setSelectedImage(gallery4)}>
                                         <img src={gallery4} alt="Gallery 4" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
                                     </div>
                                 </div>
@@ -222,7 +223,29 @@ export const PrototypeDemo = () => {
                         </div>
                     </div>
                 </div>
+                {/* Lightbox */}
+                {selectedImage && (
+                    <Lightbox image={selectedImage} onClose={() => setSelectedImage(null)} />
+                )}
             </div>
         </section>
+    );
+
+};
+
+// Lightbox Overlay
+const Lightbox = ({ image, onClose }: { image: string; onClose: () => void }) => {
+    return (
+        <div className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 animate-in fade-in duration-200" onClick={onClose}>
+            <button className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors p-2">
+                <X className="w-8 h-8" />
+            </button>
+            <img
+                src={image}
+                alt="Full size"
+                className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg animate-in zoom-in-95 duration-200"
+                onClick={(e) => e.stopPropagation()}
+            />
+        </div>
     );
 };
