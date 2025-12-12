@@ -1,19 +1,32 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Image as ImageIcon, Upload, Filter, Grid, LayoutTemplate, Sun } from "lucide-react";
+import { Image as ImageIcon, Upload, Filter, Grid, LayoutTemplate, Sun, MousePointer2, ArrowRight } from "lucide-react";
 import gallery1 from "@/assets/gallery-new-1.png";
 import gallery2 from "@/assets/gallery-new-2.png";
 import gallery3 from "@/assets/gallery-new-3.png";
 import gallery4 from "@/assets/gallery-new-4.jpg";
-import product1 from "@/assets/product-1.jpg";
+// import product1 from "@/assets/product-1.jpg"; // Replaced by case-hand
+import caseHand from "@/assets/case-hand.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.png";
+import caseBlue from "@/assets/case-blue.jpg";
 
 export const PrototypeDemo = () => {
     const { t } = useLanguage();
     const [activeView, setActiveView] = useState<"start" | "gallery" | "products">("start");
     const [selectedAgent, setSelectedAgent] = useState("Tameem");
+    const [tutorialStep, setTutorialStep] = useState(0); // 0: Start, 1: Products Viewed, 2: Gallery Viewed
+
+    const handleViewProducts = () => {
+        setActiveView("products");
+        if (tutorialStep === 0) setTutorialStep(1);
+    };
+
+    const handleViewGallery = () => {
+        setActiveView("gallery");
+        if (tutorialStep === 1) setTutorialStep(2);
+    };
 
     return (
         <section className="py-24 bg-background relative overflow-hidden" id="demo">
@@ -28,9 +41,25 @@ export const PrototypeDemo = () => {
                 </div>
 
                 {/* Prototype Container */}
-                <div className="rounded-xl border border-white/10 bg-card overflow-hidden shadow-2xl max-w-6xl mx-auto flex h-[700px]">
+                <div className="rounded-xl border border-white/10 bg-card overflow-hidden shadow-2xl max-w-6xl mx-auto flex flex-col md:flex-row h-auto md:h-[700px]">
                     {/* Sidebar */}
-                    <div className="w-64 border-r border-white/10 bg-card/50 p-6 flex flex-col gap-8 hidden md:flex">
+                    <div className="w-64 border-r border-white/10 bg-card/50 p-6 flex flex-col gap-8 hidden md:flex relative">
+                        {/* Floating Cursor Tutorial */}
+                        {tutorialStep < 2 && (
+                            <div
+                                className="absolute z-50 pointer-events-none transition-all duration-1000 ease-in-out flex items-center gap-2"
+                                style={{
+                                    top: tutorialStep === 0 ? '435px' : '490px', // Lowered positions to align with buttons
+                                    left: '40px'
+                                }}
+                            >
+                                <MousePointer2 className="w-6 h-6 text-blue-500 fill-blue-500/20 animate-bounce" />
+                                <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap animate-pulse">
+                                    Click here
+                                </span>
+                            </div>
+                        )}
+
                         <div>
                             <div className="flex items-center gap-2 mb-8">
                                 <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center font-bold text-white">A</div>
@@ -61,8 +90,8 @@ export const PrototypeDemo = () => {
                                 <div>
                                     <h3 className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-wider">Library</h3>
                                     <div className="space-y-2">
-                                        <button 
-                                            onClick={() => setActiveView("products")}
+                                        <button
+                                            onClick={handleViewProducts}
                                             className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${activeView === "products" ? "bg-white/10 text-white" : "text-muted-foreground hover:bg-white/5"}`}
                                         >
                                             <LayoutTemplate className="w-4 h-4" />
@@ -70,13 +99,13 @@ export const PrototypeDemo = () => {
                                             {/* Tutorial Hint */}
                                             {activeView === "start" && (
                                                 <span className="relative flex h-2 w-2 ml-auto">
-                                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                                                 </span>
                                             )}
                                         </button>
                                         <button
-                                            onClick={() => setActiveView("gallery")}
+                                            onClick={handleViewGallery}
                                             className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${activeView === "gallery" ? "bg-white/10 text-white" : "text-muted-foreground hover:bg-white/5"
                                                 }`}
                                         >
@@ -124,13 +153,13 @@ export const PrototypeDemo = () => {
 
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <button
-                                            onClick={() => setActiveView("products")}
+                                            onClick={handleViewProducts}
                                             className="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all text-center space-y-4 relative"
                                         >
                                             {/* Tutorial Hint */}
                                             <span className="absolute top-4 right-4 flex h-3 w-3">
-                                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                                             </span>
 
                                             <div className="w-16 h-16 rounded-full bg-white/5 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -156,9 +185,9 @@ export const PrototypeDemo = () => {
                             ) : activeView === "products" ? (
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
-                                        <img src={product1} alt="Product 1" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <img src={caseHand} alt="Product 1" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                                            <p className="text-white font-medium">Black Graphic Hoodie</p>
+                                            <p className="text-white font-medium">Clear Case (Hand)</p>
                                         </div>
                                     </div>
                                     <div className="group relative aspect-[3/4] rounded-lg overflow-hidden bg-white/5">
@@ -176,10 +205,18 @@ export const PrototypeDemo = () => {
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <img src={gallery1} alt="Gallery 1" className="w-full h-auto rounded-lg object-cover hover:scale-[1.02] transition-transform cursor-pointer" />
-                                    <img src={gallery2} alt="Gallery 2" className="w-full h-auto rounded-lg object-cover hover:scale-[1.02] transition-transform cursor-pointer" />
-                                    <img src={gallery3} alt="Gallery 3" className="w-full h-auto rounded-lg object-cover hover:scale-[1.02] transition-transform cursor-pointer" />
-                                    <img src={gallery4} alt="Gallery 4" className="w-full h-auto rounded-lg object-cover hover:scale-[1.02] transition-transform cursor-pointer" />
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                        <img src={caseBlue} alt="Gallery 1" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
+                                    </div>
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                        <img src={gallery2} alt="Gallery 2" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
+                                    </div>
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                        <img src={gallery3} alt="Gallery 3" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
+                                    </div>
+                                    <div className="rounded-lg overflow-hidden aspect-[3/4] bg-white/5">
+                                        <img src={gallery4} alt="Gallery 4" className="w-full h-full object-cover hover:scale-[1.05] transition-transform cursor-pointer" />
+                                    </div>
                                 </div>
                             )}
                         </div>

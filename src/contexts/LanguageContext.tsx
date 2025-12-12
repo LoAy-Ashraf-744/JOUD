@@ -112,8 +112,8 @@ const translations = {
     "levelUp.cta": "Get Started Today",
 
     // Form
-    "form.title": "Start Your",
-    "form.titleHighlight": "AI Project",
+    "form.title": "Start Your Business",
+    "form.titleHighlight": "With Joud",
     "form.subtitle": "Tell us about your business and let's build something amazing together",
     "form.name": "Your Name",
     "form.namePlaceholder": "John Doe",
@@ -265,8 +265,8 @@ const translations = {
     "levelUp.cta": "ابدأ اليوم",
 
     // Form
-    "form.title": "ابدأ",
-    "form.titleHighlight": "مشروعك",
+    "form.title": "ابدأ عملك",
+    "form.titleHighlight": "مع جود",
     "form.subtitle": "أخبرنا عن عملك ودعنا نبني شيئاً رائعاً معاً",
     "form.name": "اسمك",
     "form.namePlaceholder": "أحمد محمد",

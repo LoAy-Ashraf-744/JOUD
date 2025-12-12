@@ -24,7 +24,7 @@ export const Hero = () => {
 
       <div className="absolute top-20 left-10 w-72 h-72 bg-gold/15 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-deep-blue/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "1s" }} />
-      
+
 
       <div className="container relative z-10 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -40,19 +40,14 @@ export const Hero = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-start items-center pt-4">
               <div className="flex items-center gap-3">
-                 <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-deep-blue hover:bg-deep-blue/90 text-white text-lg px-8 py-6 rounded-md font-semibold w-full sm:w-auto min-w-[200px]"
-                  onClick={scrollToWaitlist}
+                  onClick={scrollToAgents}
                 >
                   {t("hero.cta.primary")}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1 rtl:rotate-180" />
                 </Button>
-                {t("hero.badge") && (
-                  <div className="text-sm font-medium text-muted-foreground bg-white/5 px-4 py-2 rounded-md border border-white/10">
-                     {t("hero.badge")}
-                  </div>
-                )}
               </div>
             </div>
           </div>
