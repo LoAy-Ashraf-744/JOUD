@@ -135,13 +135,18 @@ const translations = {
     "form.agentNeed.all": "All Agents",
     "form.projectBrief": "Project Brief (Optional)",
     "form.projectBriefHint": "Optional: Upload a brief describing your requirements",
-    "form.submit": "Request Consultation",
+    "form.submit": "Send",
     "form.submitting": "Submitting...",
     "form.disclaimer": "We typically respond within 24 hours. Your information is secure and never shared.",
     "form.error.title": "Missing fields",
     "form.error.description": "Please fill in all required fields.",
     "form.success.title": "Request sent!",
     "form.success.description": "We'll contact you within 24 hours.",
+
+    // Control
+    "control.title": "Total Control.",
+    "control.titleHighlight": "Zero Mystery.",
+    "control.subtitle": "Monitor every conversation, track hours worked, and manage your AI workforce.",
 
     // Footer
     "footer.tagline": "AI Photography Agents for Enterprise",
@@ -283,13 +288,18 @@ const translations = {
     "form.agentNeed.all": "جميع الوكلاء",
     "form.projectBrief": "ملخص المشروع (اختياري)",
     "form.projectBriefHint": "اختياري: ارفع ملخصاً يصف متطلباتك",
-    "form.submit": "طلب استشارة",
+    "form.submit": "أرسل",
     "form.submitting": "جاري الإرسال...",
     "form.disclaimer": "نرد عادة خلال ٢٤ ساعة. معلوماتك آمنة ولا تُشارك أبداً.",
     "form.error.title": "حقول مفقودة",
     "form.error.description": "يرجى ملء جميع الحقول المطلوبة.",
     "form.success.title": "تم إرسال الطلب!",
     "form.success.description": "سنتواصل معك خلال ٢٤ ساعة.",
+
+    // Control
+    "control.title": "تحكم كامل.",
+    "control.titleHighlight": "بدون غموض.",
+    "control.subtitle": "راقب كل محادثة، تتبع ساعات العمل، وأدر فريقك الذكي.",
 
     // Footer
     "footer.tagline": "وكلاء تصوير بالذكاء الاصطناعي للمؤسسات",

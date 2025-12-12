@@ -17,10 +17,10 @@ export const PrototypeDemo = () => {
             <div className="container px-4">
                 <div className="text-center mb-16 space-y-4">
                     <h2 className="text-4xl md:text-5xl font-bold">
-                        Total Control. <span className="text-gradient-gold">Zero Mystery.</span>
+                        {t("control.title")} <span className="text-gradient-gold">{t("control.titleHighlight")}</span>
                     </h2>
                     <p className="text-xl text-muted-foreground">
-                        Monitor every conversation, track hours worked, and manage your AI workforce.
+                        {t("control.subtitle")}
                     </p>
                 </div>
 
