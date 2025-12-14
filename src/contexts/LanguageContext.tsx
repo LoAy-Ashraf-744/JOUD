@@ -10,6 +10,13 @@ interface LanguageContextType {
 
 const translations = {
   en: {
+    // Navbar
+    "nav.whyJoud": "Why Joud",
+    "nav.howItWorks": "How It Works",
+    "nav.agents": "Agents",
+    "nav.demo": "Demo",
+    "nav.requestAccess": "Request Installation",
+
     // Hero
     "hero.badge": "",
     "hero.title": "JOUD",
@@ -165,6 +172,13 @@ const translations = {
     "language.ar": "العربية",
   },
   ar: {
+    // Navbar
+    "nav.whyJoud": "لماذا جود",
+    "nav.howItWorks": "كيف نعمل",
+    "nav.agents": "الوكلاء",
+    "nav.demo": "تجربة",
+    "nav.requestAccess": "طلب التثبيت",
+
     // Hero
     "hero.badge": "",
     "hero.title": "جود",
